@@ -1,9 +1,19 @@
+#include <Arduino.h>
+#line 1 "c:\\Users\\skell\\Documents\\APSC200Arduino\\test\\test.ino"
+#line 1 "c:\\Users\\skell\\Documents\\APSC200Arduino\\test\\test.ino"
 #define Light_PIN A0
 #define LED_COUNT 10
 #define LED_PIN 10
 #include <Adafruit_NeoPixel.h>
 #include <math.h>
 Adafruit_NeoPixel strip = Adafruit_NeoPixel(LED_COUNT, LED_PIN, NEO_GRB + NEO_KHZ800);
+#line 7 "c:\\Users\\skell\\Documents\\APSC200Arduino\\test\\test.ino"
+void setup();
+#line 14 "c:\\Users\\skell\\Documents\\APSC200Arduino\\test\\test.ino"
+void loop(void);
+#line 32 "c:\\Users\\skell\\Documents\\APSC200Arduino\\test\\test.ino"
+void flow(int del, int red, int green, int blue);
+#line 7 "c:\\Users\\skell\\Documents\\APSC200Arduino\\test\\test.ino"
 void setup()
 {
   Serial.begin(9600);
@@ -17,18 +27,15 @@ void loop(void)
   int blue = 0;
   int green = 0;
   int light = analogRead(Light_PIN);
-  Serial.println(light);
   if (light > 0)
   {
     red = 175 + (light / 1024) * 50;
-    blue = light * 50 / 1024;
   }
-  if (light > 200)
+  if (light > 70)
   {
-    blue = 175 + (light / 1024) * 50;
-    red = 0;
+    blue = 170 + (light / 1024) * 50;
   }
-  int delay = 100;
+  int delay = 75;
   flow(delay, red, green, blue);
 }
 
@@ -70,3 +77,4 @@ void flow(int del, int red, int green, int blue)
     delay(del);
   }
 }
+
