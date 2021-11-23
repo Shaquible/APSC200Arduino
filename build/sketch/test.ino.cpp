@@ -2,42 +2,57 @@
 #line 1 "c:\\Users\\skell\\Documents\\APSC200Arduino\\test\\test.ino"
 #line 1 "c:\\Users\\skell\\Documents\\APSC200Arduino\\test\\test.ino"
 #define O3_PIN A0    //For O3 sensor
-#define Speed_PIN A1 //Speed value for potentiometer
+#define SO2_PIN A1   //For SO2 sensor
 #define NO2_PIN A2   //For NO2 sensor
-#define SO2_PIN A3   //For SO2 sensor
+#define Speed_PIN A3 //Speed value for potentiometer
 #define LED_COUNT 10
 #define LED_PIN1 10
+#define LED_PIN2 9
+#define LED_PIN3 8
 #include <Adafruit_NeoPixel.h>
 #include <math.h>
 //O3, NO2, SO2/ in, out/ r,g,b
 int colors[3][2][3]; //3 strips, 2 in/out colours, 3 RGB values
 
-Adafruit_NeoPixel strip = Adafruit_NeoPixel(LED_COUNT, LED_PIN1, NEO_GRB + NEO_KHZ800);
+Adafruit_NeoPixel strip1 = Adafruit_NeoPixel(LED_COUNT, LED_PIN1, NEO_GRB + NEO_KHZ800);
+Adafruit_NeoPixel strip2 = Adafruit_NeoPixel(LED_COUNT, LED_PIN2, NEO_GRB + NEO_KHZ800);
+Adafruit_NeoPixel strip3 = Adafruit_NeoPixel(LED_COUNT, LED_PIN3, NEO_GRB + NEO_KHZ800);
 
-#line 14 "c:\\Users\\skell\\Documents\\APSC200Arduino\\test\\test.ino"
+#line 18 "c:\\Users\\skell\\Documents\\APSC200Arduino\\test\\test.ino"
 void setup();
-#line 24 "c:\\Users\\skell\\Documents\\APSC200Arduino\\test\\test.ino"
+#line 41 "c:\\Users\\skell\\Documents\\APSC200Arduino\\test\\test.ino"
 void loop(void);
-#line 33 "c:\\Users\\skell\\Documents\\APSC200Arduino\\test\\test.ino"
-void flow(int del, int red, int green, int blue);
-#line 72 "c:\\Users\\skell\\Documents\\APSC200Arduino\\test\\test.ino"
+#line 50 "c:\\Users\\skell\\Documents\\APSC200Arduino\\test\\test.ino"
 void breatheIn(int del);
-#line 97 "c:\\Users\\skell\\Documents\\APSC200Arduino\\test\\test.ino"
+#line 98 "c:\\Users\\skell\\Documents\\APSC200Arduino\\test\\test.ino"
 void breatheOut(int del);
-#line 124 "c:\\Users\\skell\\Documents\\APSC200Arduino\\test\\test.ino"
+#line 147 "c:\\Users\\skell\\Documents\\APSC200Arduino\\test\\test.ino"
 void changeO3();
-#line 146 "c:\\Users\\skell\\Documents\\APSC200Arduino\\test\\test.ino"
+#line 169 "c:\\Users\\skell\\Documents\\APSC200Arduino\\test\\test.ino"
 void changeNO2();
-#line 150 "c:\\Users\\skell\\Documents\\APSC200Arduino\\test\\test.ino"
+#line 173 "c:\\Users\\skell\\Documents\\APSC200Arduino\\test\\test.ino"
 void changeSO2();
-#line 14 "c:\\Users\\skell\\Documents\\APSC200Arduino\\test\\test.ino"
+#line 18 "c:\\Users\\skell\\Documents\\APSC200Arduino\\test\\test.ino"
 void setup()
 {
   Serial.begin(9600);
   for (int i = 0; i < 3; i++)
   {
-    strip.begin();
-    strip.show();
+    switch (i)
+    {
+    case 0:
+      strip1.begin();
+      strip1.show();
+      break;
+    case 1:
+      strip2.begin();
+      strip2.show();
+      break;
+    case 2:
+      strip3.begin();
+      strip3.show();
+      break;
+    }
   }
 }
 
@@ -48,45 +63,6 @@ void loop(void)
   changeO3();
   breatheIn(delay);
   breatheOut(delay);
-}
-
-void flow(int del, int red, int green, int blue)
-
-{
-  for (int i = 0; i < LED_COUNT; i++)
-  {
-    for (int j = 0; j < LED_COUNT; j++)
-    {
-      float scale = abs(i - j);
-      if (scale > 0)
-      {
-        scale = 1 / scale;
-      }
-      else
-        scale = 1;
-      uint32_t color = strip.Color(red * scale, green * scale, blue * scale);
-      strip.setPixelColor(j, color);
-    }
-    strip.show();
-    delay(del);
-  }
-  for (int i = (LED_COUNT - 2); i > 0; i--)
-  {
-    for (int j = 0; j < LED_COUNT; j++)
-    {
-      float scale = abs(i - j);
-      if (scale > 0)
-      {
-        scale = 1 / scale;
-      }
-      else
-        scale = 1;
-      uint32_t color = strip.Color(red * scale, green * scale, blue * scale);
-      strip.setPixelColor(j, color);
-    }
-    strip.show();
-    delay(del);
-  }
 }
 
 void breatheIn(int del)
@@ -104,19 +80,42 @@ void breatheIn(int del)
         scale = 1;
       for (int h = 0; h < 3; h++)
       {
-        uint32_t color = strip.Color(colors[h][0][0] * scale, colors[h][0][1] * scale, colors[h][0][2] * scale);
-        strip.setPixelColor(j, color);
+        uint32_t color = strip1.Color(colors[h][0][0] * scale, colors[h][0][1] * scale, colors[h][0][2] * scale);
+        switch (h)
+        {
+        case 0:
+          strip1.setPixelColor(j, color);
+          break;
+        case 1:
+          strip2.setPixelColor(j, color);
+          break;
+        case 2:
+          strip3.setPixelColor(j, color);
+          break;
+        }
       }
     }
     for (int h = 0; h < 3; h++)
     {
+      switch (h)
+      {
+      case 0:
+        strip1.show();
+        break;
+      case 1:
+        strip2.show();
+        break;
+      case 2:
+        strip3.show();
+        break;
+      }
     }
     delay(del);
   }
 }
 void breatheOut(int del)
 {
-  for (int i = (LED_COUNT - 1); i < -1; i--)
+  for (int i = (LED_COUNT - 1); i > -1; i--)
   {
     for (int j = 0; j < LED_COUNT; j++)
     {
@@ -129,13 +128,35 @@ void breatheOut(int del)
         scale = 1;
       for (int h = 0; h < 3; h++)
       {
-        uint32_t color = strip.Color(colors[h][0][0] * scale, colors[h][0][1] * scale, colors[h][0][2] * scale);
-        strip.setPixelColor(j, color);
+        uint32_t color = strip1.Color(colors[h][1][0] * scale, colors[h][1][1] * scale, colors[h][1][2] * scale);
+        switch (h)
+        {
+        case 0:
+          strip1.setPixelColor(j, color);
+          break;
+        case 1:
+          strip2.setPixelColor(j, color);
+          break;
+        case 2:
+          strip3.setPixelColor(j, color);
+          break;
+        }
       }
     }
     for (int h = 0; h < 3; h++)
     {
-      strip.show();
+      switch (h)
+      {
+      case 0:
+        strip1.show();
+        break;
+      case 1:
+        strip2.show();
+        break;
+      case 2:
+        strip3.show();
+        break;
+      }
     }
     delay(del);
   }

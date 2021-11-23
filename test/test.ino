@@ -18,7 +18,7 @@ Adafruit_NeoPixel strip3 = Adafruit_NeoPixel(LED_COUNT, LED_PIN3, NEO_GRB + NEO_
 void setup()
 {
   Serial.begin(9600);
-  for (int i = 0 i < 3; i++)
+  for (int i = 0; i < 3; i++)
   {
     switch (i)
     {
@@ -40,14 +40,18 @@ void setup()
 
 void loop(void)
 {
-  int delay = analogRead(Speed_PIN);
-  delay = map(delay, 80, 1023, 50, 175);
   changeO3();
-  breatheIn(delay);
-  breatheOut(delay);
+  changeSO2();
+  changeNO2();
+  breatheIn();
+  breatheOut();
 }
 
-void breatheIn(int del)
+int d_time(int del)
+{
+  return = map(del, 80, 1023, 50, 175);
+}
+void breatheIn(void)
 {
   for (int i = 0; i < LED_COUNT; i++)
   {
@@ -92,12 +96,12 @@ void breatheIn(int del)
         break;
       }
     }
-    delay(del);
+    delay(d_time(analogRead(Speed_PIN)));
   }
 }
-void breatheOut(int del)
+void breatheOut(void)
 {
-  for (int i = (LED_COUNT - 1); i > -1; i++)
+  for (int i = (LED_COUNT - 1); i > -1; i--)
   {
     for (int j = 0; j < LED_COUNT; j++)
     {
@@ -140,7 +144,7 @@ void breatheOut(int del)
         break;
       }
     }
-    delay(del);
+    delay(d_time(analogRead(Speed_PIN)));
   }
 }
 
@@ -168,8 +172,44 @@ void changeO3()
 
 void changeNO2()
 {
+  int no2Value = analogRead(NO2_PIN);
+
+  colors[1][0][0] = map(no2Value, 80, 1023, 20, 200);
+  colors[1][0][1] = 0;
+  colors[1][0][2] = map(no2Value, 80, 1023, 20, 200);
+
+  if (no2Value < 400)
+  {
+    colors[1][1][0] = map(no2Value, 80, 1023, 20, 50);
+    colors[1][1][1] = 0;
+    colors[1][1][2] = 0;
+  }
+  else
+  {
+    colors[1][1][0] = map(no2Value, 80, 1023, 20, 200);
+    colors[1][1][1] = map(no2Value, 80, 1023, 20, 200);
+    colors[1][1][2] = map(no2Value, 80, 1023, 20, 200);
+  }
 }
 
 void changeSO2()
 {
+  int so2Value = analogRead(SO2_PIN);
+
+  colors[2][0][0] = map(so2Value, 80, 1023, 20, 200);
+  colors[2][0][1] = 0;
+  colors[2][0][2] = map(so2Value, 80, 1023, 20, 200);
+
+  if (so2Value < 400)
+  {
+    colors[2][1][0] = map(so2Value, 80, 1023, 20, 50);
+    colors[2][1][1] = 0;
+    colors[2][1][2] = 0;
+  }
+  else
+  {
+    colors[2][1][0] = map(so2Value, 80, 1023, 20, 200);
+    colors[2][1][1] = map(so2Value, 80, 1023, 20, 200);
+    colors[2][1][2] = map(so2Value, 80, 1023, 20, 200);
+  }
 }
