@@ -155,7 +155,7 @@ void breatheOut(void)
     delay(d_time(analogRead(Speed_PIN)));
   }
 }
-
+//purple
 void changeO3()
 {
   int o3Value = analogRead(O3_PIN);
@@ -177,7 +177,7 @@ void changeO3()
     colors[0][1][2] = 200;
   }
 }
-
+//blue
 void changeNO2()
 {
   int no2Value = analogRead(NO2_PIN);
@@ -199,7 +199,7 @@ void changeNO2()
     colors[1][1][2] = 200;
   }
 }
-
+//green
 void changeSO2()
 {
   int so2Value = analogRead(SO2_PIN);
