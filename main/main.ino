@@ -155,7 +155,10 @@ void breatheOut(void)
     delay(d_time(analogRead(Speed_PIN)));
   }
 }
+//gradually adjust the red level on the breathe out
 //purple
+//add small variance to the red value
+//150-200
 void changeO3()
 {
   int o3Value = analogRead(O3_PIN);
@@ -164,6 +167,7 @@ void changeO3()
   colors[0][0][1] = 0;
   colors[0][0][2] = 200;
 
+  //change on all three from if statement to map white to more red (less blue and green)
   if (o3Value < 400)
   {
     colors[0][1][0] = 200;
@@ -178,6 +182,7 @@ void changeO3()
   }
 }
 //blue
+//add small varaiance to the green value
 void changeNO2()
 {
   int no2Value = analogRead(NO2_PIN);
