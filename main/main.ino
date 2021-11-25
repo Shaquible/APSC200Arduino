@@ -53,7 +53,7 @@ int d_time(int del)
 }
 void breatheIn(void)
 {
-  for (int i = 0; i < LED_COUNT; i++)
+  for (int i = LED_COUNT - 1; i >= 0; i--)
   {
     for (int j = 0; j < LED_COUNT; j++)
     {
@@ -67,7 +67,7 @@ void breatheIn(void)
       for (int h = 0; h < 3; h++)
       {
         uint32_t color;
-        if (j <= i)
+        if (j >= i)
           color = strip1.Color(colors[h][0][0] * scale, colors[h][0][1] * scale, colors[h][0][2] * scale);
         else
           color = strip1.Color(colors[h][1][0] * scale, colors[h][1][1] * scale, colors[h][1][2] * scale);
@@ -105,7 +105,7 @@ void breatheIn(void)
 }
 void breatheOut(void)
 {
-  for (int i = (LED_COUNT - 1); i > -1; i--)
+  for (int i = 0; i < LED_COUNT; i++)
   {
     for (int j = 0; j < LED_COUNT; j++)
     {
@@ -119,7 +119,7 @@ void breatheOut(void)
       for (int h = 0; h < 3; h++)
       {
         uint32_t color;
-        if (j >= i)
+        if (j <= i)
           color = strip1.Color(colors[h][1][0] * scale, colors[h][1][1] * scale, colors[h][1][2] * scale);
         else
           color = strip1.Color(colors[h][0][0] * scale, colors[h][0][1] * scale, colors[h][0][2] * scale);
