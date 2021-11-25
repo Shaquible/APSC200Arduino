@@ -49,7 +49,7 @@ void loop(void)
 
 int d_time(int del)
 {
-  return = map(del, 80, 1023, 50, 175);
+  return map(del, 80, 1023, 50, 175);
 }
 void breatheIn(void)
 {
@@ -66,7 +66,11 @@ void breatheIn(void)
         scale = 1;
       for (int h = 0; h < 3; h++)
       {
-        uint32_t color = strip1.Color(colors[h][0][0] * scale, colors[h][0][1] * scale, colors[h][0][2] * scale);
+        uint32_t color;
+        if (j <= i)
+          color = strip1.Color(colors[h][0][0] * scale, colors[h][0][1] * scale, colors[h][0][2] * scale);
+        else
+          color = strip1.Color(colors[h][1][0] * scale, colors[h][1][1] * scale, colors[h][1][2] * scale);
         switch (h)
         {
         case 0:
@@ -114,7 +118,11 @@ void breatheOut(void)
         scale = 1;
       for (int h = 0; h < 3; h++)
       {
-        uint32_t color = strip1.Color(colors[h][1][0] * scale, colors[h][1][1] * scale, colors[h][1][2] * scale);
+        uint32_t color;
+        if (j >= i)
+          color = strip1.Color(colors[h][1][0] * scale, colors[h][1][1] * scale, colors[h][1][2] * scale);
+        else
+          color = strip1.Color(colors[h][0][0] * scale, colors[h][0][1] * scale, colors[h][0][2] * scale);
         switch (h)
         {
         case 0:
@@ -152,21 +160,21 @@ void changeO3()
 {
   int o3Value = analogRead(O3_PIN);
 
-  colors[0][0][0] = map(o3Value, 80, 1023, 20, 200);
+  colors[0][0][0] = 200;
   colors[0][0][1] = 0;
-  colors[0][0][2] = map(o3Value, 80, 1023, 20, 200);
+  colors[0][0][2] = 200;
 
   if (o3Value < 400)
   {
-    colors[0][1][0] = map(o3Value, 80, 1023, 20, 50);
+    colors[0][1][0] = 200;
     colors[0][1][1] = 0;
     colors[0][1][2] = 0;
   }
   else
   {
-    colors[0][1][0] = map(o3Value, 80, 1023, 20, 200);
-    colors[0][1][1] = map(o3Value, 80, 1023, 20, 200);
-    colors[0][1][2] = map(o3Value, 80, 1023, 20, 200);
+    colors[0][1][0] = 200;
+    colors[0][1][1] = 200;
+    colors[0][1][2] = 200;
   }
 }
 
@@ -174,21 +182,21 @@ void changeNO2()
 {
   int no2Value = analogRead(NO2_PIN);
 
-  colors[1][0][0] = map(no2Value, 80, 1023, 20, 200);
-  colors[1][0][1] = 0;
-  colors[1][0][2] = map(no2Value, 80, 1023, 20, 200);
+  colors[1][0][0] = 0;
+  colors[1][0][1] = 200;
+  colors[1][0][2] = 200;
 
   if (no2Value < 400)
   {
-    colors[1][1][0] = map(no2Value, 80, 1023, 20, 50);
+    colors[1][1][0] = 200;
     colors[1][1][1] = 0;
     colors[1][1][2] = 0;
   }
   else
   {
-    colors[1][1][0] = map(no2Value, 80, 1023, 20, 200);
-    colors[1][1][1] = map(no2Value, 80, 1023, 20, 200);
-    colors[1][1][2] = map(no2Value, 80, 1023, 20, 200);
+    colors[1][1][0] = 200;
+    colors[1][1][1] = 200;
+    colors[1][1][2] = 200;
   }
 }
 
@@ -196,20 +204,20 @@ void changeSO2()
 {
   int so2Value = analogRead(SO2_PIN);
 
-  colors[2][0][0] = map(so2Value, 80, 1023, 20, 200);
-  colors[2][0][1] = 0;
-  colors[2][0][2] = map(so2Value, 80, 1023, 20, 200);
+  colors[2][0][0] = 0;
+  colors[2][0][1] = 200;
+  colors[2][0][2] = map(so2Value, 80, 1023, 20, 50);
 
   if (so2Value < 400)
   {
-    colors[2][1][0] = map(so2Value, 80, 1023, 20, 50);
+    colors[2][1][0] = 200;
     colors[2][1][1] = 0;
     colors[2][1][2] = 0;
   }
   else
   {
-    colors[2][1][0] = map(so2Value, 80, 1023, 20, 200);
-    colors[2][1][1] = map(so2Value, 80, 1023, 20, 200);
-    colors[2][1][2] = map(so2Value, 80, 1023, 20, 200);
+    colors[2][1][0] = 200;
+    colors[2][1][1] = 200;
+    colors[2][1][2] = 200;
   }
 }
