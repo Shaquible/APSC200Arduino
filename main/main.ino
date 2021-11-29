@@ -162,67 +162,46 @@ void breatheOut(void)
 void changeO3()
 {
   int o3Value = analogRead(O3_PIN);
+  o3Value = map(o3Value, 0, 1023, 0, 1023);
 
   colors[0][0][0] = 200;
   colors[0][0][1] = 0;
-  colors[0][0][2] = 200;
-
-  //change on all three from if statement to map white to more red (less blue and green)
-  if (o3Value < 400)
-  {
-    colors[0][1][0] = 200;
-    colors[0][1][1] = 0;
-    colors[0][1][2] = 0;
-  }
-  else
-  {
-    colors[0][1][0] = 200;
-    colors[0][1][1] = 200;
-    colors[0][1][2] = 200;
-  }
+  colors[0][0][2] = map(o3Value, 0, 1023, 150, 200);
+  //inverts the reading so that the light is brighter when the value is lower
+  o3Value = 1023 - o3Value;
+  colors[0][1][0] = 200;
+  colors[0][1][1] = map(o3Value, 0, 1023, 0, 200);
+  colors[0][1][2] = map(o3Value, 0, 1023, 0, 200);
 }
 //blue
 //add small varaiance to the green value
 void changeNO2()
 {
   int no2Value = analogRead(NO2_PIN);
+  no2Value = map(no2Value, 0, 1023, 0, 1023);
 
   colors[1][0][0] = 0;
-  colors[1][0][1] = 200;
+  colors[1][0][1] = map(no2Value, 0, 1023, 150, 200);
   colors[1][0][2] = 200;
 
-  if (no2Value < 400)
-  {
-    colors[1][1][0] = 200;
-    colors[1][1][1] = 0;
-    colors[1][1][2] = 0;
-  }
-  else
-  {
-    colors[1][1][0] = 200;
-    colors[1][1][1] = 200;
-    colors[1][1][2] = 200;
-  }
+  no2Value = 1023 - no2Value;
+  colors[1][1][0] = 200;
+  colors[1][1][1] = map(no2Value, 0, 1023, 0, 200);
+  colors[1][1][2] = map(no2Value, 0, 1023, 0, 200);
 }
 //green
 void changeSO2()
 {
   int so2Value = analogRead(SO2_PIN);
+  //allows the color to be mapped depending on the value of the sensor
+  so2Value = map(so2Value, 0, 1023, 0, 1023;
 
   colors[2][0][0] = 0;
   colors[2][0][1] = 200;
   colors[2][0][2] = map(so2Value, 80, 1023, 20, 50);
 
-  if (so2Value < 400)
-  {
-    colors[2][1][0] = 200;
-    colors[2][1][1] = 0;
-    colors[2][1][2] = 0;
-  }
-  else
-  {
-    colors[2][1][0] = 200;
-    colors[2][1][1] = 200;
-    colors[2][1][2] = 200;
-  }
+  so2Value = 1023 - so2Value;
+  colors[2][1][0] = 200;
+  colors[2][1][1] = map(so2Value, 0, 1023, 0, 200);
+  colors[2][1][2] = map(so2Value, 0, 1023, 0, 200);
 }
