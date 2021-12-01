@@ -44,12 +44,14 @@ void loop(void)
   changeSO2();
   changeNO2();
   breatheIn();
+  delay(d_time(analogRead(Speed_PIN)));
   breatheOut();
+  delay(d_time(analogRead(Speed_PIN)));
 }
 
 int d_time(int del)
 {
-  return map(del, 80, 1023, 50, 175);
+  return map(del, 15, 200, 50, 175);
 }
 void breatheIn(void)
 {
@@ -162,7 +164,7 @@ void breatheOut(void)
 void changeO3()
 {
   int o3Value = analogRead(O3_PIN);
-  o3Value = map(o3Value, 0, 1023, 0, 1023);
+  o3Value = map(o3Value, 102, 184, 0, 1023);
 
   colors[0][0][0] = 200;
   colors[0][0][1] = 0;
@@ -178,7 +180,7 @@ void changeO3()
 void changeNO2()
 {
   int no2Value = analogRead(NO2_PIN);
-  no2Value = map(no2Value, 0, 1023, 0, 1023);
+  no2Value = map(no2Value, 102, 184, 0, 1023);
 
   colors[1][0][0] = 0;
   colors[1][0][1] = map(no2Value, 0, 1023, 150, 200);
@@ -194,7 +196,7 @@ void changeSO2()
 {
   int so2Value = analogRead(SO2_PIN);
   //allows the color to be mapped depending on the value of the sensor
-  so2Value = map(so2Value, 0, 1023, 0, 1023;
+  so2Value = map(so2Value, 102, 184, 0, 1023);
 
   colors[2][0][0] = 0;
   colors[2][0][1] = 200;
