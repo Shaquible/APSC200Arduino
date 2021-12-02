@@ -10,5 +10,4 @@ c:\Users\skell\Documents\APSC200Arduino\build\sketch\test.ino.cpp.o: \
  C:\Users\skell\AppData\Local\Arduino15\packages\arduino\hardware\avr\1.8.2\cores\arduino/Printable.h \
  C:\Users\skell\AppData\Local\Arduino15\packages\arduino\hardware\avr\1.8.2\cores\arduino/USBAPI.h \
  C:\Users\skell\AppData\Local\Arduino15\packages\arduino\hardware\avr\1.8.2\cores\arduino/Arduino.h \
- C:\Users\skell\AppData\Local\Arduino15\packages\arduino\hardware\avr\1.8.2\variants\standard/pins_arduino.h \
- C:\Users\skell\Documents\Arduino\libraries\Adafruit_NeoPixel/Adafruit_NeoPixel.h
+ C:\Users\skell\AppData\Local\Arduino15\packages\arduino\hardware\avr\1.8.2\variants\standard/pins_arduino.h

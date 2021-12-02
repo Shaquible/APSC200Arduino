@@ -11,36 +11,6 @@
   },
   {
     "Sourcefile": "c:\\Users\\skell\\Documents\\APSC200Arduino\\build\\sketch\\test.ino.cpp",
-    "Include": "Adafruit_NeoPixel.h",
-    "Includepath": "C:\\Users\\skell\\Documents\\Arduino\\libraries\\Adafruit_NeoPixel"
-  },
-  {
-    "Sourcefile": "c:\\Users\\skell\\Documents\\APSC200Arduino\\build\\sketch\\test.ino.cpp",
-    "Include": "",
-    "Includepath": ""
-  },
-  {
-    "Sourcefile": "C:\\Users\\skell\\Documents\\Arduino\\libraries\\Adafruit_NeoPixel\\Adafruit_NeoPixel.cpp",
-    "Include": "",
-    "Includepath": ""
-  },
-  {
-    "Sourcefile": "C:\\Users\\skell\\Documents\\Arduino\\libraries\\Adafruit_NeoPixel\\esp.c",
-    "Include": "",
-    "Includepath": ""
-  },
-  {
-    "Sourcefile": "C:\\Users\\skell\\Documents\\Arduino\\libraries\\Adafruit_NeoPixel\\esp8266.c",
-    "Include": "",
-    "Includepath": ""
-  },
-  {
-    "Sourcefile": "C:\\Users\\skell\\Documents\\Arduino\\libraries\\Adafruit_NeoPixel\\kendyte_k210.c",
-    "Include": "",
-    "Includepath": ""
-  },
-  {
-    "Sourcefile": "C:\\Users\\skell\\Documents\\Arduino\\libraries\\Adafruit_NeoPixel\\rp2040.c",
     "Include": "",
     "Includepath": ""
   }
