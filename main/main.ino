@@ -14,6 +14,12 @@ int colors[3][2][3]; //3 strips, 2 in/out colours, 3 RGB values
 Adafruit_NeoPixel strip1 = Adafruit_NeoPixel(LED_COUNT, LED_PIN1, NEO_GRB + NEO_KHZ800);
 Adafruit_NeoPixel strip2 = Adafruit_NeoPixel(LED_COUNT, LED_PIN2, NEO_GRB + NEO_KHZ800);
 Adafruit_NeoPixel strip3 = Adafruit_NeoPixel(LED_COUNT, LED_PIN3, NEO_GRB + NEO_KHZ800);
+int d_time(int del);
+void breatheIn(void);
+void breatheOut(void);
+void changeO3(void);
+void changeSO2(void);
+void changeNO2(void);
 
 void setup()
 {
@@ -158,7 +164,7 @@ void breatheOut(void)
   }
 }
 
-void changeO3()
+void changeO3(void)
 {
   int o3Value = analogRead(O3_PIN);
   o3Value = map(o3Value, 102, 184, 0, 1023);
@@ -173,7 +179,7 @@ void changeO3()
   colors[0][1][2] = map(o3Value, 0, 1023, 0, 200);
 }
 
-void changeNO2()
+void changeNO2(void)
 {
   int no2Value = analogRead(NO2_PIN);
   no2Value = map(no2Value, 102, 184, 0, 1023);
@@ -188,7 +194,7 @@ void changeNO2()
   colors[1][1][2] = map(no2Value, 0, 1023, 0, 200);
 }
 
-void changeSO2()
+void changeSO2(void)
 {
   int so2Value = analogRead(SO2_PIN);
   so2Value = map(so2Value, 102, 184, 0, 1023);
